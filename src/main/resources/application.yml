@@ -1,0 +1,24 @@
+#server:
+#  port: 8080
+#  #context-path: /demo
+##cupSize: B
+##age: 18
+##content: "cupSize：${cupSize}, age：${age} "
+#girl:
+#  cupSize: B
+#  age: 18
+
+
+spring:
+  profiles:
+    active: dev
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/dbgirl
+    data-password: root
+    username: root
+    password: root
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
