@@ -3,9 +3,12 @@ package com.anjoulee.demospringboot.controller;
 import com.anjoulee.demospringboot.domain.Girl;
 import com.anjoulee.demospringboot.repository.GirlRepository;
 import com.anjoulee.demospringboot.service.GirlService;
+import com.anjoulee.demospringboot.util.LoggerUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -22,7 +25,9 @@ public class GirlController {
      */
     @GetMapping(value = "/girls")
     public List<Girl> girls() {
+        LoggerUtil.info(this.getClass(), "girls Before");
         return girlRepository.findAll();
+
     }
 
     @GetMapping(value = "/girls/age/{age}")
@@ -34,15 +39,16 @@ public class GirlController {
     /**
      * 添加
      *
-     * @param cupSize
-     * @param age
      * @return
      */
     @PostMapping(value = "/girls")
-    public Girl addGirl(@RequestParam("cupSize") String cupSize, @RequestParam("age") Integer age) {
-        Girl girl = new Girl();
-        girl.setCupSize(cupSize);
-        girl.setAge(age);
+    public Girl addGirl(@Valid Girl girl, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            System.out.println(bindingResult.getFieldError().getDefaultMessage());
+            return null;
+        }
+        girl.setCupSize(girl.getCupSize());
+        girl.setAge(girl.getAge());
         return girlRepository.save(girl);
     }
 

@@ -55,6 +55,11 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
+        <!--AOP切面依赖-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
         <!--模板配置文件，当前服务大都采用前后端分离，所以不再使用模板方式实现-->
         <!--<dependency>
             <groupId>org.springframework.boot</groupId>
