@@ -1,9 +1,11 @@
 package com.anjoulee.demospringboot.controller;
 
 import com.anjoulee.demospringboot.domain.Girl;
+import com.anjoulee.demospringboot.domain.Result;
 import com.anjoulee.demospringboot.repository.GirlRepository;
 import com.anjoulee.demospringboot.service.GirlService;
 import com.anjoulee.demospringboot.util.LoggerUtil;
+import com.anjoulee.demospringboot.util.ResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -42,14 +44,14 @@ public class GirlController {
      * @return
      */
     @PostMapping(value = "/girls")
-    public Girl addGirl(@Valid Girl girl, BindingResult bindingResult) {
+    public Result<Girl> addGirl(@Valid Girl girl, BindingResult bindingResult) {
+        Result result = new Result();
         if (bindingResult.hasErrors()) {
-            System.out.println(bindingResult.getFieldError().getDefaultMessage());
-            return null;
+            return ResultUtil.error(1, bindingResult.getFieldError().getDefaultMessage());
         }
         girl.setCupSize(girl.getCupSize());
         girl.setAge(girl.getAge());
-        return girlRepository.save(girl);
+        return ResultUtil.success(girlRepository.save(girl));
     }
 
     /**
@@ -94,5 +96,10 @@ public class GirlController {
     @PostMapping(value = "/girls/two")
     public void addTwo() {
         girlService.addTwo();
+    }
+
+    @GetMapping(value = "/girls/getAge/{id}")
+    public void getAge(@PathVariable("id") Integer id) throws Exception {
+        girlService.getAge(id);
     }
 }
