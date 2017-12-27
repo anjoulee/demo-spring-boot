@@ -40,4 +40,8 @@ public class GirlService {
             //返回“你可能再高中以上的学校”
         }
     }
+
+    public Girl findOne(Integer id) {
+        return girlRepository.findOne(id);
+    }
 }

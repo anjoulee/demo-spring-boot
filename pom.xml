@@ -60,11 +60,17 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
+        <!--spring-boot热部署依赖JAR-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <optional>true</optional>
+        </dependency>
         <!--模板配置文件，当前服务大都采用前后端分离，所以不再使用模板方式实现-->
-        <!--<dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
-        </dependency>-->
+        </dependency>
     </dependencies>
 
     <build>
@@ -72,6 +78,14 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <!--通过mvn命令启动热部署，命令为：mvn spring-boot:run-->
+                <!--<dependencies>-->
+                <!--<dependency>-->
+                <!--<groupId>org.springframework</groupId>-->
+                <!--<artifactId>springloaded</artifactId>-->
+                <!--<version>1.2.8.RELEASE</version>-->
+                <!--</dependency>-->
+                <!--</dependencies>-->
             </plugin>
         </plugins>
     </build>
